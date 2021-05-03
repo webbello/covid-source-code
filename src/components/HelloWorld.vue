@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello container">
     <h1>{{ msg }}</h1>
     <p>
       Note: This list of resources is crowdsourced. The purpose of this is to

@@ -1,16 +1,16 @@
 <template>
   <div id="oxygen" class="container-fluid">
     <div class="table-responsive">
-      <table class="table table-sm table-hover table-bordered">
+      <table class="table table-hover align-middle">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Address</th>
             <th scope="col">Contact</th>
-            <th scope="col">Quantity available</th>
+            <th scope="col">Quantity Available</th>
             <th scope="col">Price</th>
-            <th scope="col">Last Updated at</th>
+            <th scope="col">Last Updated At</th>
             <th scope="col">Last Updated By</th>
             <th scope="col">Remarks</th>
           </tr>
@@ -20,7 +20,7 @@
             <th scope="row">{{index+1}}</th>
             <td>{{ quote.name }}</td>
             <td>{{ quote.address }}</td>
-            <td>{{ quote.contactinformation }}</td>
+            <td><a :href="'tel:'+ quote.contactinformation">{{ quote.contactinformation }}</a></td>
             <td>{{ quote.quantityavailable }}</td>
             <td>{{ quote.price }}</td>
             <td>{{ quote.lastupdatedat }}</td>
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     parseData: function (entries) {
-      console.log("entries", entries);
+      // console.log("entries", entries);
 
       entries.forEach( (value) => {
           var entry = {
@@ -86,3 +86,7 @@ export default {
   },
 };
 </script>
+<style>
+table thead {white-space:nowrap}
+
+</style>
