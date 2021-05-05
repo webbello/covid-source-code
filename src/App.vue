@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/beds">Beds + Ventilators</router-link> |
+      <router-link to="/vaccine">Vaccine</router-link> |
       <router-link to="/oxygen">Oxygen on Rent</router-link>
     </div>
     <router-view />

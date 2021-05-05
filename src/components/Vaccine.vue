@@ -1,25 +1,30 @@
 <template>
-  <div id="oxygen" class="container-fluid">
-    <div class="table-responsive">
+  <div id="vaccine" class="container-fluid">
+    <div class="alert alert-success" v-if="!vaccineList.length" role="alert">
+      Verification under process
+    </div>
+    <div v-else class="table-responsive">
       <table class="table table-hover align-middle table-striped">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Address</th>
             <th scope="col">Contact</th>
-            <th scope="col">Quantity Available</th>
+            <th scope="col">Timing</th>
             <th scope="col">Price</th>
+            <th scope="col">Next Available Slot</th>
             <th scope="col">Last Updated At</th>
             <th scope="col">Remarks</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(quote, index) in oxygenList" :key="quote.id" class="organisation-name">
+          <tr v-for="(quote, index) in vaccineList" :key="quote.id" class="organisation-name">
             <th scope="row">{{index+1}}</th>
             <td>{{ quote.address }}</td>
             <td><a :href="'tel:'+ quote.contactinformation">{{ quote.contactinformation }}</a> <br/> {{ quote.name }}</td>
-            <td>{{ quote.quantityavailable }}</td>
+            <td>{{ quote.timing }}</td>
             <td>{{ quote.price }}</td>
+            <td>{{ quote.nextavailableslot }}</td>
             <td>{{ quote.lastupdatedat }}</td>
             <td>{{ quote.details }}</td>
           </tr>
@@ -33,15 +38,15 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Oxygen",
+  name: "Vaccine",
   props: {
     msg: String,
   },
   data() {
     return {
       gsheet_url:
-        "https://spreadsheets.google.com/feeds/list/1FOu1EFIudho88Iz5sHNgrr8XWSzJkdi9Grxty2U0Rz4/1/public/values?alt=json",
-      oxygenList: [],
+        "https://spreadsheets.google.com/feeds/list/1FOu1EFIudho88Iz5sHNgrr8XWSzJkdi9Grxty2U0Rz4/5/public/values?alt=json",
+      vaccineList: [],
       sheetUpdated: '',
       authorList: [],
       tagList: []
@@ -49,7 +54,7 @@ export default {
   },
   created: function () {
     axios.get(this.gsheet_url).then((res) => {
-        // this.oxygenList = res.data;
+        // this.vaccineList = res.data;
         // console.log("gsheet", res.data.feed.entry);
         this.sheetUpdated = res.data.feed.updated;
         this.parseData(res.data.feed.entry);
@@ -64,16 +69,17 @@ export default {
               "name": value.gsx$name.$t,
               "address": value.gsx$address.$t,
               "contactinformation": value.gsx$contactinformation.$t,
-              "quantityavailable": value.gsx$quantityavailable.$t,
+              "timing": value.gsx$timing.$t,
               "price": value.gsx$price.$t,
+              "nextavailableslot": value.gsx$nextavailableslot.$t,
               "lastupdatedat": value.gsx$lastupdatedat.$t,
               "lastupdatedby": value.gsx$lastupdatedby.$t,
               "details": value.gsx$details.$t,
               "status": value.gsx$status.$t
           };
-          if(value.gsx$status.$t === 'Available'){
+          if(value.gsx$status.$t === 'Available' || value.gsx$status.$t === 'Not Available'){
             // Push entry into the list of quotes
-            this.oxygenList.push(entry);
+            this.vaccineList.push(entry);
           }
       });
       // this.authorList = Array.from(authorSet);

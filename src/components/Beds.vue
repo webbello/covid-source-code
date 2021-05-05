@@ -1,6 +1,9 @@
 <template>
-  <div id="oxygen" class="container-fluid">
-    <div class="table-responsive">
+  <div id="beds" class="container-fluid">
+    <div class="alert alert-success" v-if="!bedList.length" role="alert">
+      Verification under process
+    </div>
+    <div v-else class="table-responsive">
       <table class="table table-hover align-middle table-striped">
         <thead>
           <tr>
@@ -14,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(quote, index) in oxygenList" :key="quote.id" class="organisation-name">
+          <tr v-for="(quote, index) in bedList" :key="quote.id" class="organisation-name">
             <th scope="row">{{index+1}}</th>
             <td>{{ quote.address }}</td>
             <td><a :href="'tel:'+ quote.contactinformation">{{ quote.contactinformation }}</a> <br/> {{ quote.name }}</td>
@@ -33,15 +36,15 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Oxygen",
+  name: "Beds",
   props: {
     msg: String,
   },
   data() {
     return {
       gsheet_url:
-        "https://spreadsheets.google.com/feeds/list/1FOu1EFIudho88Iz5sHNgrr8XWSzJkdi9Grxty2U0Rz4/1/public/values?alt=json",
-      oxygenList: [],
+        "https://spreadsheets.google.com/feeds/list/1FOu1EFIudho88Iz5sHNgrr8XWSzJkdi9Grxty2U0Rz4/4/public/values?alt=json",
+      bedList: [],
       sheetUpdated: '',
       authorList: [],
       tagList: []
@@ -49,7 +52,7 @@ export default {
   },
   created: function () {
     axios.get(this.gsheet_url).then((res) => {
-        // this.oxygenList = res.data;
+        // this.bedList = res.data;
         // console.log("gsheet", res.data.feed.entry);
         this.sheetUpdated = res.data.feed.updated;
         this.parseData(res.data.feed.entry);
@@ -73,7 +76,7 @@ export default {
           };
           if(value.gsx$status.$t === 'Available'){
             // Push entry into the list of quotes
-            this.oxygenList.push(entry);
+            this.bedList.push(entry);
           }
       });
       // this.authorList = Array.from(authorSet);
