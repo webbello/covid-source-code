@@ -30,6 +30,9 @@
       </table>
     </div>
     Last updated at: {{sheetUpdated.$t}}
+    <hr/>
+      Visitor
+    <h2>{{ count }} </h2>
   </div>
 </template>
 
@@ -46,6 +49,7 @@ export default {
         "https://spreadsheets.google.com/feeds/list/1FOu1EFIudho88Iz5sHNgrr8XWSzJkdi9Grxty2U0Rz4/4/public/values?alt=json",
       bedList: [],
       sheetUpdated: '',
+      count: 0,
       authorList: [],
       tagList: []
     };
@@ -57,6 +61,7 @@ export default {
         this.sheetUpdated = res.data.feed.updated;
         this.parseData(res.data.feed.entry);
     });
+    this.updateVisitCount();
   },
   methods: {
     parseData: function (entries) {
@@ -84,6 +89,21 @@ export default {
       // this.tagList = Array.from(tagSet);
       // this.tagList.sort();
     },
+    updateVisitCount: function () {
+      axios.get('https://api.countapi.xyz/hit/cov-aid/kolkata-beds').then((res) => {
+          console.log("hit", res.data);
+          this.count = res.data.value;
+      });
+    },
+    LocalVisitCount: function () {
+      var n = localStorage.getItem('beds_visit_counter');
+      if (n === null) {
+          n = 0;
+      }
+      n++;
+      localStorage.setItem("beds_visit_counter", n);
+      this.count = n;
+    }
   },
 };
 </script>

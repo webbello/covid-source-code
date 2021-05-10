@@ -1,6 +1,11 @@
 <template>
   <div class="hello container">
-    <h1>{{ msg }}</h1>
+    <!-- <h1>{{ msg }}</h1> -->
+    <p class="lead">
+      <router-link to="/oxygen" class="btn btn-lg btn-success fw-bold border-white bg-dark">Oxygen on Rent</router-link>
+      <router-link to="/vaccine" class="btn btn-lg btn-secondary fw-bold border-white bg-dark  ">Vaccine</router-link>
+      <router-link to="/beds" class="btn btn-lg btn-secondary fw-bold border-white bg-dark">Beds + Ventilators</router-link>
+    </p>
     <p>
       Note: This list of resources is crowdsourced. The purpose of this is to
       ensure that all the information scattered across various social media
@@ -23,24 +28,56 @@
     <ul>
       <li>
         <a href="https://www.wbhealth.gov.in" target="_blank" rel="noopener"
-          >Health & Family Welfare</a
+          >WB Health & Family Welfare</a
         >
       </li>
       <li>
         <a href="https://excise.wb.gov.in" target="_blank" rel="noopener"
-          >Forum</a
+          >Excise Directorate</a
         >
       </li>
     </ul>
+    <hr/>
+      Visitor
+    <h2>{{ count }} </h2>
+
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
   },
+  data() {
+    return {
+      count: 0,
+    };
+  },
+  created: function () {
+    this.updateVisitCount();
+    console.log(this.$route.path)
+  },
+  methods: {
+    updateVisitCount: function () {
+      axios.get('https://api.countapi.xyz/hit/cov-aid/kolkata').then((res) => {
+          console.log("hit", res.data);
+          this.count = res.data.value;
+      });
+    },
+    LocalVisitCount: function () {
+      var n = localStorage.getItem('homepage_counter');
+      if (n === null) {
+          n = 0;
+      }
+      n++;
+      localStorage.setItem("homepage_counter", n);
+      this.count = n;
+    }
+  },
+
 };
 </script>
 

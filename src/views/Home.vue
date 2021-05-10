@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/helping-logo.webp" />
-    <HelloWorld msg="Welcome to Covid Resource Knowledge Portal" />
+    <HelloWorld msg="Welcome to Cov-aid" />
   </div>
 </template>
 

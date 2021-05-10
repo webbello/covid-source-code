@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="this.$route.path !== '/'">
       <router-link to="/">Home</router-link> |
-      <router-link to="/beds">Beds + Ventilators</router-link> |
+      <router-link to="/oxygen">Oxygen on Rent</router-link>  |
       <router-link to="/vaccine">Vaccine</router-link> |
-      <router-link to="/oxygen">Oxygen on Rent</router-link>
+      <router-link to="/beds">Beds + Ventilators</router-link> 
     </div>
     <router-view />
   </div>
@@ -20,7 +20,7 @@
 }
 
 #nav {
-  padding: 30px;
+  padding: 20px 0 10px;
 }
 
 #nav a {
