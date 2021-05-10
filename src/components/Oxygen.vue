@@ -1,20 +1,20 @@
 <template>
   <div id="oxygen" class="container-fluid">
     <div class="table-responsive">
-      <table class="table table-hover align-middle table-striped">
+      <table class="table table-bordered  align-middle table-striped">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Address</th>
-            <th scope="col">Contact</th>
-            <th scope="col">Quantity Available</th>
-            <th scope="col">Price</th>
-            <th scope="col">Last Updated At</th>
-            <th scope="col">Remarks</th>
+            <th scope="col" > <a href="#" v-on:click="sort('address')">Address</a> </th>
+            <th scope="col"> <a href="#" v-on:click="sort('contactinformation')">Contact</a> </th>
+            <th scope="col"> <a href="#" v-on:click="sort('quantityavailable')">Quantity Available</a> </th>
+            <th scope="col"> <a href="#" v-on:click="sort('price')">Price</a> </th>
+            <th scope="col"> <a href="#" v-on:click="sort('lastupdatedat')"> Last Updated At</a> </th>
+            <th scope="col"><a href="#" v-on:click="sort('details')"> Remarks </a> </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(quote, index) in oxygenList" :key="quote.id" class="organisation-name">
+          <tr v-for="(quote, index) in showOxygenList" :key="quote.id" class="organisation-name">
             <th scope="row">{{index+1}}</th>
             <td>{{ quote.address }}</td>
             <td><a :href="'tel:'+ quote.contactinformation">{{ quote.contactinformation }}</a> <br/> {{ quote.name }}</td>
@@ -47,11 +47,27 @@ export default {
       oxygenList: [],
       sheetUpdated: '',
       count: 0,
-      authorList: [],
-      tagList: []
+      currentSort: 'lastupdatedat',
+      currentSortDir: 'asc',
+      search: '',
     };
   },
+  computed: {
+    showOxygenList() {
+      return this.oxygenList.filter(a => {
+        // console.log('a.pn',a.address)
+        return (a.address + '').includes(this.search)
+      })
+      .sort((a, b) => {
+      if (this.currentSortDir === 'asc') {
+        return a[this.currentSort] >= b[this.currentSort];      
+      }
+      return a[this.currentSort] <= b[this.currentSort];
+    })
+    },
+  },
   created: function () {
+    
     axios.get(this.gsheet_url).then((res) => {
         // this.oxygenList = res.data;
         // console.log("gsheet", res.data.feed.entry);
@@ -87,6 +103,17 @@ export default {
       // this.tagList = Array.from(tagSet);
       // this.tagList.sort();
     },
+    sort: function(col) {
+      // if you click the same label twice
+      console.log('col', col)
+      if(this.currentSort == col){
+        this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
+      }else{
+        this.currentSort = col;
+        console.log( 'diff col: '+col );
+      } // end if
+
+    }, // sort
     updateVisitCount: function () {
       axios.get('https://api.countapi.xyz/hit/cov-aid/kolkata-oxygen').then((res) => {
           console.log("hit", res.data);

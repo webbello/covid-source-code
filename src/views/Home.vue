@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/helping-logo.webp" />
+    <img alt="Vue logo" class="mb-2" src="../assets/helping-logo.webp" />
     <HelloWorld msg="Welcome to Cov-aid" />
   </div>
 </template>
