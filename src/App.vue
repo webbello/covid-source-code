@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/oxygen">Oxygen on Rent</router-link>  |
       <router-link to="/vaccine">Vaccine</router-link> |
-      <router-link to="/beds">Beds + Ventilators</router-link> 
+      <router-link to="/beds">Beds + Ventilators</router-link> |
+      <router-link to="/form">Form</router-link> 
     </div>
     <router-view />
   </div>

@@ -11,7 +11,7 @@
       ensure that all the information scattered across various social media
       platforms is organised methodically in one place, accessible to all, and
       easy to find at times of need. Those who submit leads directly through the
-      google form attached here will be credited by name, the rest of the
+       <router-link to="/form">google form</router-link>  attached here will be credited by name, the rest of the
       information has primarily been gathered from Facebook, Instagram and
       Twitter.
     </p>
@@ -34,6 +34,10 @@
       <li>
         <a href="https://excise.wb.gov.in" target="_blank" rel="noopener"
           >Excise Directorate</a
+        >
+      </li>
+      <li>
+        <router-link to="/form">Become Volunteer / Add a verified supplier</router-link>
         >
       </li>
     </ul>
