@@ -7,23 +7,15 @@
       <router-link to="/beds" class="btn btn-lg btn-secondary fw-bold border-white bg-dark">Beds + Ventilators</router-link>
     </p>
     <p>
-      Note: This list of resources is crowdsourced. The purpose of this is to
-      ensure that all the information scattered across various social media
-      platforms is organised methodically in one place, accessible to all, and
-      easy to find at times of need. Those who submit leads directly through the
-       <router-link to="/form">google form</router-link>  attached here will be credited by name, the rest of the
-      information has primarily been gathered from Facebook, Instagram and
-      Twitter.
+      Note: Clicking on the above buttons will take you to the list of available services (for Kolkata for the time being). This list of resources is crowdsourced. The purpose of this is to ensure that all the information scattered across various social media platforms is organized methodically in one place, accessible to all, and easy to find at times of need. Those who submit leads directly through the <router-link to="/form">Google form</router-link> attached here will be credited by name, the rest of the information has primarily been gathered from WhatsApp and Facebook.
     </p>
     <p>
-      While we are doing our best to verify and update these leads, we are a
-      very small group of individuals with classes or full-time jobs. Unless
-      specified otherwise, the leads are unverified, but we will try our best to
-      get them verified at the earliest. We request you to exercise caution when
-      engaging with these resources and if there's anything amiss, please report
-      to the authorities, and let us know as well using the google form linked
-      above so that we may update this portal accordingly. Thank you.
+      While we are doing our best to verify and update these leads by calling them every day, we are a very small group of individuals with classes or full-time jobs. We request you to exercise caution when engaging with these resources and if there's anything amiss, please report to us, and let us know as well using the google form linked above so that we may update this portal accordingly. 
+      Thank you!
     </p>
+    <li>
+        <a href="https://haidertanzeel003.medium.com/heres-how-we-are-trying-to-help-during-the-covid-19-pandemic-af8397ca42b5" target="_blank" rel="noopener">Know more ></a>
+      </li>
     <h3>Essential Links</h3>
     <ul>
       <li>
@@ -37,8 +29,12 @@
         >
       </li>
       <li>
-        <router-link to="/form">Become Volunteer / Add a verified supplier</router-link>
+        <a href="https://indiacovidresources.in/" target="_blank" rel="noopener"
+          >India Covid Resources</a
         >
+      </li>
+      <li>
+        <router-link to="/form">Become a Volunteer / Add a verified supplier</router-link>
       </li>
     </ul>
     <hr/>
